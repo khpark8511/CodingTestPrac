@@ -1,36 +1,34 @@
 n = int(input())
-graph = [[] for x in range(n+1)]
-
+graph = []
+cnt = 0 
+global hcnt 
+hcnt = 0 
+hcntlist = [] 
 for i in range(n):
-    graph[i] = list(map(int,input()))
+    graph.append(list(map(int,input())))
 
 def dfs(x,y):
-    global cnt 
-    if x < 0 or y <0 or x >= n or y >= n :
-        return False
-    if graph[x][y] == 0:
-        return False
-    if graph[x][y] == 1:
-        graph[x][y] = 0
-        cnt += 1 
-         
+    global hcnt 
+    if 0<=x<n and 0<=y<n and graph[x][y] == 1 :
+        graph[x][y] = 0 
+        hcnt += 1 
         dfs(x-1,y)
         dfs(x,y-1)
         dfs(x+1,y)
-        dfs(x,y+1)  
-        return True
+        dfs(x,y+1)
+        return 1 
     return False
-global cnt
-cnt = 0 
-res = 0
-resList = [] 
+
 for i in range(n):
     for j in range(n):
-        if dfs(i,j) == True:      
-            resList.append(cnt)
-            res += 1
-            cnt = 0    
-print(res)
-resList.sort()
-for i in resList:
-    print(i)
+        res = dfs(i,j)
+        if  res == 1 :
+            cnt += res
+            hcntlist.append(hcnt)
+            hcnt = 0 
+print(cnt)
+hcntlist.sort()
+for i in range(len(hcntlist)):
+    print(hcntlist[i])
+            
+
