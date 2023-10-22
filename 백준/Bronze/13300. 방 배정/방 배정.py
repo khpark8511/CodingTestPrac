@@ -8,18 +8,20 @@ for i in range(n):
         f_s[y] += 1 
     else:
         m_s[y] += 1    
-
+#print('f_s, m_s:',f_s,m_s)
 for i in range(1,7):
     if f_s[i] !=0 :
-        if f_s[i] % 2 == 0 :
-            res += f_s[i]//2
+        if f_s[i] % k == 0 :
+            res += f_s[i]//k
         else:
-            res += f_s[i]//2+ f_s[i]%2
+            res += f_s[i]//k+1
+    #print('f_s res: ',res)
     if m_s[i] !=0 : 
-        if m_s[i] % 2 == 0 :
-            res += m_s[i]//2
+        if m_s[i] % k == 0 :
+            res += m_s[i]//k
         else:
-            res += m_s[i]//2+ m_s[i]%2
+            res += m_s[i]//k+1
+    #print('m_s res: ',res)
 print(res)
 
 
