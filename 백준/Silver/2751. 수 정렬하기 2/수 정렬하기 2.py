@@ -1,10 +1,8 @@
 n = int(input())
-graph = []
+arr = []
 for i in range(n):
-    graph.append(int(input()))
+    arr.append(int(input()))
+arr.sort()
 
-graph.sort()
-for i in range(len(graph)):
-    print(graph[i])
-
-
+for i in range(n):
+    print(arr[i])
