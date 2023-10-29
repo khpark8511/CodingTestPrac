@@ -1,14 +1,9 @@
-n = int(input())
-cnt = 0 
+import sys 
+n = int(sys.stdin.readline().rstrip())
+arr = list(map(int,sys.stdin.readline().split()))
+arr2 = sorted(set(arr))
 res = dict()
-num = list(map(int,input().split()))
-
-zip = sorted(num)
-for i in range(n):    
-    if i > 0 : 
-        if zip[i-1] != zip[i]:
-            cnt += 1
-    res[zip[i]] = cnt
-
-for i in num:
-    print(int(res[i]), end=' ')
+for i in range(len(arr2)):
+    res[arr2[i]] = i          
+for i in range(len(arr)):
+    print(res[arr[i]],end =' ') 
