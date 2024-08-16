@@ -1,9 +1,8 @@
+import sys
 while True:
     try:
-        a = input()
-        if a == "" : 
-            break
-        else:
-            print(a)
+        s = sys.stdin.readline().strip()
+        if len(s) == 0 : break 
+        else:   print(s)
     except:
         break
