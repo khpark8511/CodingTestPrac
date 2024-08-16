@@ -1,43 +1,36 @@
-from collections import deque
-#dfs
-def dfs_func(graph,v,visited):
-    visited[v] = True
-    print(v, end=' ')
-    for i in graph[v]:
-        if not visited[i]: 
-            dfs_func(graph,i,visited)
+from collections import deque 
+n,m,v = map(int,input().split())
+q = deque()
+graph = [[] for _ in range(n+1)]
+visited = [0]*(n+1)
 
-#bfs
-def bfs_func(graph,start,visited):
-    queue = deque([start])
-    visited[start] = True
+for i in range(m):
+    a,b = map(int,input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+for i in range(n+1):
+    graph[i].sort()
 
-    while queue:
-        v=  queue.popleft()
-        print(v, end=' ')
+def dfs(x):
+    if not visited[x]:
+        visited[x] = True
+        print(x, end =' ')
+        for i in graph[x]:
+            if not visited[i]:
+                dfs(i)
+def bfs(x):
+    print(x,end=' ')
+    visited[x] = True
+    q.append(x)
+    while q : 
+        v = q.popleft()
         for i in graph[v]:
             if not visited[i]:
-                queue.append(i)
+                q.append(i)
                 visited[i] = True
-
-
-
-
-n,m,v = map(int, input().split())
-graph = [[] for i in range(n+1)]
-
-visited = [False] * (n+1)
-graph.append([])
-for i in range(1,m+1):
-    first, second = map(int,input().split())    
-    if first >= 0 and first <= n:
-        graph[first].append(second)
-        graph[first].sort()
-    if second >= 0 and second <= n:
-        graph[second].append(first)
-        graph[second].sort()    
-    
-dfs_func(graph,v,visited)
-visited = [False] * (n+1)
+                print(i,end=' ')
+dfs(v)
 print()
-bfs_func(graph,v,visited)
+visited = [0]*(n+1)
+bfs(v)
+                
