@@ -1,36 +1,30 @@
-# 1325. 효율적인 해킹 
-import sys 
-from collections import deque 
-input = sys.stdin.readline
-
 n,m = map(int,input().split())
 graph = [[] for _ in range(n+1)]
+res,f_res = [],[]
 visited = [0]*(n+1)
-q = deque()
-res, max_i,max_val =0,[],[0]*(n+1)
 
+# 3.stack을 사용해서 bfs check 
+def chk(x):
+    stack = [] 
+    visited[x] = 1 
+    stack.append(x)
+    while stack : 
+        now = stack.pop()
+        for next in graph[now]:
+            if not visited[next]:
+                visited[next] = 1
+                stack.append(next)
+    res.append(sum(visited))   
+# 1.노드 연결 정보 입력받기 
 for i in range(m):
     a,b = map(int,input().split())
     graph[b].append(a)
-
-def bfs(x):
-    global res 
-    visited[x] = True
-    q.append(x)
-    while q : 
-        v = q.popleft()
-        for i in graph[v]:
-            if not visited[i]:
-                visited[i] = True
-                res += 1 
-                q.append(i)
-
+# 2.노드 별 연결상태 확인 chk 
 for i in range(1,n+1):
-    res = 0  
     visited = [0]*(n+1)
-    bfs(i)
-    max_val[i] = res 
-for i in range(1,n+1):    
-    if max(max_val) == max_val[i] : 
-        max_i.append(i)
-print(*max_i)
+    chk(i)
+# 4.max 값 index 확인 
+for i in range(n):
+    if max(res) == res[i] : 
+        f_res.append(i+1)
+print(*f_res)
