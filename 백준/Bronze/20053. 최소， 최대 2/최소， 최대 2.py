@@ -1,10 +1,5 @@
-n = int(input())
-res = []
-for i in range(n):
-    res = []
-    t = int(input())
-    num = list(map(int,input().split()))
-    res.append(min(num))
-    res.append(max(num))
-    print(*res)
-
+t = int(input())
+for i in range(t):
+    n = int(input())
+    li = list(map(int,input().split()))
+    print(min(li),max(li))
